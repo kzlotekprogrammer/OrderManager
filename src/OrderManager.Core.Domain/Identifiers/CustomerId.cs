@@ -2,7 +2,10 @@
 
 namespace OrderManager.Domain.Identifiers;
 
-public record CustomerId
+public record CustomerId(Guid Value)
 {
-    public Guid Value { get; init; }
+    public static CustomerId New()
+    {
+        return new CustomerId(Guid.NewGuid());
+    }
 }
