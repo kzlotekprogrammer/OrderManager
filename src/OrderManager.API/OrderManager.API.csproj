@@ -2,11 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrderManager.Core\OrderManager.Core.csproj" />
+    <ProjectReference Include="..\OrderManager.Infrastructure\OrderManager.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
