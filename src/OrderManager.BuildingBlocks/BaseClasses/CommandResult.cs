@@ -1,6 +1,6 @@
 ﻿namespace OrderManager.BuildingBlocks.BaseClasses;
 
-public record CommandResult<T>(bool IsSuccess, T Data, string ErrorMessage)
+public record CommandResult<T>(bool IsSuccess, T? Data, string? ErrorMessage)
 {
     public static CommandResult<T> Success(T data)
     {

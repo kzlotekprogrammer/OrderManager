@@ -6,8 +6,8 @@ namespace OrderManager.Core.Extensions;
 
 public static class MappingExtensions
 {
-    public static OrderItem Map(this OrderItemDto orderItemDto)
+    public static OrderItem Map(this OrderItemDto orderItemDto, OrderId orderId)
     {
-        return new OrderItem(OrderItemId.New(), orderItemDto.ProductName, orderItemDto.Price, orderItemDto.Quantity);
+        return new OrderItem(OrderItemId.New(), orderId, orderItemDto.ProductName, orderItemDto.Price, orderItemDto.Quantity);
     }
 }

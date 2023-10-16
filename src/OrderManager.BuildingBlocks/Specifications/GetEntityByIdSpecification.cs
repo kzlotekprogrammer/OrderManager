@@ -16,6 +16,6 @@ public class GetEntityByIdSpecification<TEntity, TIdentifier> : ISpecification<T
 
     public Expression<Func<TEntity, bool>> ToExpression()
     {
-        return entity => entity.Id.Equals(_id);
+        return entity => entity.Id != null && entity.Id.Equals(_id);
     }
 }

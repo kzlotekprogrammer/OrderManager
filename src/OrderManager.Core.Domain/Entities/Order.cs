@@ -10,11 +10,16 @@ public class Order : AggregateRoot<OrderId>
 {
     private readonly List<OrderItem> _items;
 
-    public Guid CustomerId { get; private set; }
+    public CustomerId CustomerId { get; private set; } = default!;
     public OrderStatus Status { get; private set; }
     public IReadOnlyCollection<OrderItem> Items => _items;
 
-    public Order(OrderId id, Guid customerId, List<OrderItem> items) : base(id)
+    private Order()
+    {
+        _items = new List<OrderItem>();
+    }
+
+    public Order(OrderId id, CustomerId customerId, List<OrderItem> items) : base(id)
     {
         CustomerId = customerId;
         Status = OrderStatus.Pending;

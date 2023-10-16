@@ -9,5 +9,5 @@ namespace OrderManager.Core.Commands;
 public record CreateOrderCommand : IRequest<CommandResult<Guid>>
 {
     public Guid CustomerId;
-    public List<OrderItemDto> OrderItems { get; init; }
+    public List<OrderItemDto> OrderItems { get; init; } = default!;
 }
