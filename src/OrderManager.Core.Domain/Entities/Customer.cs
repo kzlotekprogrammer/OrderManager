@@ -1,6 +1,6 @@
 ﻿using OrderManager.BuildingBlocks.BaseClasses;
+using OrderManager.Core.Domain.Identifiers;
 using OrderManager.Core.Domain.ValueObjects;
-using OrderManager.Domain.Identifiers;
 
 namespace OrderManager.Core.Domain.Entities;
 

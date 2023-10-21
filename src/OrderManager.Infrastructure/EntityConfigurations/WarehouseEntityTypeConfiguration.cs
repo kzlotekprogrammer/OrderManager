@@ -5,21 +5,19 @@ using OrderManager.Core.Domain.Identifiers;
 
 namespace OrderManager.Infrastructure.EntityConfigurations;
 
-public class CustomerEntityTypeConfiguration : IEntityTypeConfiguration<Customer>
+public class WarehouseEntityTypeConfiguration : IEntityTypeConfiguration<Warehouse>
 {
-    public void Configure(EntityTypeBuilder<Customer> builder)
+    public void Configure(EntityTypeBuilder<Warehouse> builder)
     {
         builder
-            .HasKey(c => c.Id);
+            .HasKey(w => w.Id);
 
         builder
-            .Property(c => c.Id)
+            .Property(w => w.Id)
             .HasConversion
             (
                 id => id.Value,
-                value => new CustomerId(value)
+                value => new WarehouseId(value)
             );
-
-        builder.OwnsOne(c => c.Address);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrderManager.Domain.Identifiers;
+namespace OrderManager.Core.Domain.Identifiers;
 
 public record OrderItemId(Guid Value)
 {

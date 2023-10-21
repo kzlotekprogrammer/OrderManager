@@ -1,6 +1,6 @@
 ﻿using OrderManager.BuildingBlocks.Interfaces;
 using OrderManager.Core.Domain.Entities;
-using OrderManager.Domain.Identifiers;
+using OrderManager.Core.Domain.Identifiers;
 
 namespace OrderManager.Core.Domain.Interfaces;
 

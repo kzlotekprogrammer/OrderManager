@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OrderManager.Domain.Entities;
-using OrderManager.Domain.Identifiers;
+using OrderManager.Core.Domain.Entities;
+using OrderManager.Core.Domain.Identifiers;
 
 namespace OrderManager.Infrastructure.EntityConfigurations;
 
@@ -18,6 +18,14 @@ public class OrderItemEntityTypeConfiguration : IEntityTypeConfiguration<OrderIt
             (
                 id => id.Value,
                 value => new OrderItemId(value)
+            );
+
+        builder
+            .Property(oi => oi.ProductId)
+            .HasConversion
+            (
+                id => id.Value,
+                value => new ProductId(value)
             );
 
         builder

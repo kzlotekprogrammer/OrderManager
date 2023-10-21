@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using OrderManager.BuildingBlocks.BaseClasses;
+using OrderManager.Core.Domain.Identifiers;
+using OrderManager.Core.Domain.ValueObjects;
 using OrderManager.Domain.Enums;
-using OrderManager.Domain.Identifiers;
 
-namespace OrderManager.Domain.Entities;
+namespace OrderManager.Core.Domain.Entities;
 
 public class Order : AggregateRoot<OrderId>
 {
     private readonly List<OrderItem> _items;
 
     public CustomerId CustomerId { get; private set; } = default!;
+    public Address Address { get; private set; } = default!;
     public OrderStatus Status { get; private set; }
     public IReadOnlyCollection<OrderItem> Items => _items;
 
@@ -19,11 +21,12 @@ public class Order : AggregateRoot<OrderId>
         _items = new List<OrderItem>();
     }
 
-    public Order(OrderId id, CustomerId customerId, List<OrderItem> items) : base(id)
+    public Order(OrderId id, CustomerId customerId, Address address) : base(id)
     {
         CustomerId = customerId;
+        Address = address;
         Status = OrderStatus.Pending;
-        _items = items;
+        _items = new List<OrderItem>();
     }
 
     public void AddItem(OrderItem item)
@@ -56,6 +59,14 @@ public class Order : AggregateRoot<OrderId>
             throw new InvalidOperationException("Order can only be canceled if it is pending.");
 
         Status = OrderStatus.Canceled;
+    }
+
+    public void ChangeAddress(Address address)
+    {
+        if (Status != OrderStatus.Pending)
+            throw new InvalidOperationException("Address can only be changed if order status is pending.");
+
+        Address = address;
     }
 
     public decimal CalculateTotalAmount()
