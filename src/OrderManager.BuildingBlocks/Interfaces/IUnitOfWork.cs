@@ -1,10 +1,8 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 
 namespace OrderManager.BuildingBlocks.Interfaces;
 
 public interface IUnitOfWork
 {
-    void BeginTransaction();
-    void CommitTransaction();
-    void RollbackTransaction();
+    Task SaveChangesAsync();
 }

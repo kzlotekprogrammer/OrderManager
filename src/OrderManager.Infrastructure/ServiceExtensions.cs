@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OrderManager.BuildingBlocks.Interfaces;
 
 namespace OrderManager.Infrastructure;
 
@@ -14,7 +15,7 @@ public static class ServiceExtensions
             options.UseSnakeCaseNamingConvention();
         });
 
-        services.AddScoped<UnitOfWork>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
