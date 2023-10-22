@@ -4,9 +4,9 @@ using OrderManager.BuildingBlocks.BaseClasses;
 
 namespace OrderManager.Core.Commands.WarehouseCommands;
 
-public class AddProductCommand : IRequest<CommandResult<Guid>>
+public record AddProductCommand : IRequest<CommandResult<Guid>>
 {
-    public string Name { get; private set; } = default!;
-    public decimal Price { get; private set; }
-    public int Amount { get; private set; }
+    public string Name { get; init; } = default!;
+    public decimal Price { get; init; }
+    public int Amount { get; init; }
 }

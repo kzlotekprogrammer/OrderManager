@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+﻿using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace OrderManager.API;
+namespace OrderManager.Core;
 
 public static class ServiceExtensions
 {

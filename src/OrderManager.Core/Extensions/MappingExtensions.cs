@@ -11,8 +11,8 @@ public static class MappingExtensions
         {
             City = addressDto.City,
             Street = addressDto.Street,
-            State = addressDto.State,
-            ZipCode = addressDto.ZipCode
+            PostalCode = addressDto.PostalCode,
+            PostalOffice = addressDto.PostalOffice
         };
     }
 }

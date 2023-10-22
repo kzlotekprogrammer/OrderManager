@@ -19,5 +19,10 @@ public class WarehouseEntityTypeConfiguration : IEntityTypeConfiguration<Warehou
                 id => id.Value,
                 value => new WarehouseId(value)
             );
+
+        builder.HasData(new
+        {
+            Id = WarehouseId.Create()
+        });
     }
 }

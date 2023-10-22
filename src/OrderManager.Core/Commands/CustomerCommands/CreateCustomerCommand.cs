@@ -9,5 +9,5 @@ public record CreateCustomerCommand : IRequest<CommandResult<Guid>>
 {
     public string FirstName { get; init; } = default!;
     public string LastName { get; init; } = default!;
-    public AddressDto Address { get; private set; } = default!;
+    public AddressDto Address { get; init; } = default!;
 }

@@ -12,7 +12,7 @@ using OrderManager.Core.Domain.Interfaces;
 
 namespace OrderManager.Core.Commands.OrderCommands;
 
-public class AddOrderItemCommandHandler : IRequestHandler<AddOrderItemCommand, CommandResult<Unit>>
+public class AddOrderItemCommandHandler : IRequestHandler<AddOrderItemCommand, CommandResult<Guid>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IOrderRepository _orderRepository;
@@ -28,20 +28,20 @@ public class AddOrderItemCommandHandler : IRequestHandler<AddOrderItemCommand, C
         _warehouseRepository = warehouseRepository ?? throw new ArgumentNullException(nameof(warehouseRepository));
     }
 
-    public async Task<CommandResult<Unit>> Handle(AddOrderItemCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResult<Guid>> Handle(AddOrderItemCommand request, CancellationToken cancellationToken)
     {
         Warehouse? warehouse = await _warehouseRepository.FindOneAsync(new GetEntityByIdSpecification<Warehouse, WarehouseId>(WarehouseId.Create()));
         if (warehouse is null)
-            return CommandResult<Unit>.Failure($"Warehouse does not exists");
+            return CommandResult<Guid>.Failure($"Warehouse does not exists");
 
         Product? product = warehouse.Products.FirstOrDefault(p => p.Id.Value == request.ProductId);
         if (product is null)
-            return CommandResult<Unit>.Failure($"Product with id={request.ProductId} is not defined in warehouse");
+            return CommandResult<Guid>.Failure($"Product with id={request.ProductId} is not defined in warehouse");
 
         OrderId orderId = new(request.OrderId);
         Order? order = await _orderRepository.FindOneAsync(new GetEntityByIdSpecification<Order, OrderId>(orderId));
         if (order is null)
-            return CommandResult<Unit>.Failure($"Order with id={request.OrderId} does not exists");
+            return CommandResult<Guid>.Failure($"Order with id={request.OrderId} does not exists");
 
         OrderItemId orderItemId = OrderItemId.New();
         OrderItem orderItem = new(orderItemId, orderId, product.Id, product.Name, product.Price, request.Quantity);
@@ -50,6 +50,6 @@ public class AddOrderItemCommandHandler : IRequestHandler<AddOrderItemCommand, C
         await _orderRepository.UpdateAsync(order);
         await _unitOfWork.SaveChangesAsync();
 
-        return CommandResult<Unit>.Success(Unit.Value);
+        return CommandResult<Guid>.Success(orderItemId.Value);
     }
 }

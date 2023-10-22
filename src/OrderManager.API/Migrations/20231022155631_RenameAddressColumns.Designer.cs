@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OrderManager.Infrastructure;
@@ -11,9 +12,11 @@ using OrderManager.Infrastructure;
 namespace OrderManager.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231022155631_RenameAddressColumns")]
+    partial class RenameAddressColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,12 +148,6 @@ namespace OrderManager.API.Migrations
                         .HasName("pk_warehouses");
 
                     b.ToTable("warehouses", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d6fe83ac-d02b-42a7-a5e2-1d8bbe9f6f35")
-                        });
                 });
 
             modelBuilder.Entity("OrderManager.Core.Domain.Entities.Customer", b =>

@@ -4,7 +4,7 @@ using OrderManager.BuildingBlocks.BaseClasses;
 
 namespace OrderManager.Core.Commands.OrderCommands;
 
-public class AddOrderItemCommand : IRequest<CommandResult<Unit>>
+public record AddOrderItemCommand : IRequest<CommandResult<Guid>>
 {
     public Guid OrderId { get; init; }
     public Guid ProductId { get; init; }

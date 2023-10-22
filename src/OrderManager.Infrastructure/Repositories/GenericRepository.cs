@@ -8,24 +8,24 @@ namespace OrderManager.Infrastructure.Repositories;
 
 public class GenericRepository<TEntity, TIdentifier> : IRepository<TEntity, TIdentifier> where TEntity : class
 {
-    private readonly AppDbContext _context;
+    protected readonly AppDbContext _context;
 
     public GenericRepository(AppDbContext context)
     {
         _context = context;
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync()
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
         return await _context.Set<TEntity>().ToListAsync();
     }
 
-    public async Task<IEnumerable<TEntity>> FindAsync(ISpecification<TEntity> specification)
+    public virtual async Task<IEnumerable<TEntity>> FindAsync(ISpecification<TEntity> specification)
     {
         return await _context.Set<TEntity>().Where(specification.ToExpression()).ToListAsync();
     }
 
-    public async Task<TEntity?> FindOneAsync(ISpecification<TEntity> specification)
+    public virtual async Task<TEntity?> FindOneAsync(ISpecification<TEntity> specification)
     {
         return await _context.Set<TEntity>().FirstOrDefaultAsync(specification.ToExpression());
     }
