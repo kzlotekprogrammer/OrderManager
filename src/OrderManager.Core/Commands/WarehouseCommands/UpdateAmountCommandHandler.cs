@@ -30,7 +30,7 @@ public class UpdateAmountCommandHandler : IRequestHandler<UpdateAmountCommand, C
         if (warehouse is null)
             return CommandResult<Unit>.Failure($"Warehouse does not exists");
 
-        ProductId productId = new ProductId(request.ProductId);
+        ProductId productId = new(request.ProductId);
         warehouse.UpdateAmount(productId, request.Amount);
 
         await _warehouseRepository.UpdateAsync(warehouse);

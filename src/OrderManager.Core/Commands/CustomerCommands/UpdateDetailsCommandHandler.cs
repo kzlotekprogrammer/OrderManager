@@ -27,7 +27,7 @@ public class UpdateDetailsCommandHandler : IRequestHandler<UpdateDetailsCommand,
 
     public async Task<CommandResult<Unit>> Handle(UpdateDetailsCommand request, CancellationToken cancellationToken)
     {
-        CustomerId customerId = new CustomerId(request.CustomerId);
+        CustomerId customerId = new(request.CustomerId);
         Customer? customer = await _customerRepository.FindOneAsync(new GetEntityByIdSpecification<Customer, CustomerId>(customerId));
         if (customer is null)
             return CommandResult<Unit>.Failure($"Customer with id={request.CustomerId} does not exists");

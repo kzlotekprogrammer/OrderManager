@@ -27,7 +27,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
     public async Task<CommandResult<Guid>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         CustomerId customerId = CustomerId.New();
-        Customer customer = new Customer(customerId, request.FirstName, request.LastName, request.Address.Map());
+        Customer customer = new(customerId, request.FirstName, request.LastName, request.Address.Map());
 
         await _customerRepository.AddAsync(customer);
         await _unitOfWork.SaveChangesAsync();

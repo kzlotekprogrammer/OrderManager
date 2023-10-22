@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderManager.BuildingBlocks.Interfaces;
+using OrderManager.Core.Domain.Interfaces;
+using OrderManager.Infrastructure.Repositories;
 
 namespace OrderManager.Infrastructure;
 
@@ -16,6 +18,10 @@ public static class ServiceExtensions
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IWarehouseRepository, WarehouseRepository>();
 
         return services;
     }
