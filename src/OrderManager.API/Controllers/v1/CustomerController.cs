@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OrderManager.API.Controllers.v1.Extensions;
 using OrderManager.API.Controllers.v1.Models;
-using OrderManager.BuildingBlocks.BaseClasses;
+using OrderManager.BuildingBlocks;
 
 namespace OrderManager.API.Controllers.v1;
 

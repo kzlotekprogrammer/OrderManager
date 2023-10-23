@@ -6,6 +6,7 @@ using OrderManager.BuildingBlocks.Interfaces;
 using OrderManager.Core.Domain.Entities;
 using OrderManager.Core.Domain.Identifiers;
 using OrderManager.Core.Domain.Interfaces;
+using OrderManager.Domain.Enums;
 
 namespace OrderManager.Infrastructure.Repositories;
 
@@ -15,14 +16,14 @@ public class OrderRepository : GenericRepository<Order, OrderId>, IOrderReposito
     {
     }
 
-    public override async Task<IEnumerable<Order>> GetAllAsync()
+    public override async Task<List<Order>> GetAllAsync()
     {
         return await _context.Orders
             .Include(o => o.Items)
             .ToListAsync();
     }
 
-    public override async Task<IEnumerable<Order>> FindAsync(ISpecification<Order> specification)
+    public override async Task<List<Order>> FindAsync(ISpecification<Order> specification)
     {
         return await _context.Orders
             .Where(specification.ToExpression())
@@ -35,5 +36,16 @@ public class OrderRepository : GenericRepository<Order, OrderId>, IOrderReposito
         return await _context.Orders
             .Include(o => o.Items)
             .FirstOrDefaultAsync(specification.ToExpression());
+    }
+
+    public async Task<List<Order>> GetOrdersAffectedByProductPriceChangeAsync(ProductId productId)
+    {
+        List<Order> ordersContainingProduct = await _context.Orders
+                .Where(order => order.Status == OrderStatus.Pending &&
+                                order.Items.Any(item => item.ProductId == productId))
+                .Include(o => o.Items)
+                .ToListAsync();
+
+        return ordersContainingProduct;
     }
 }

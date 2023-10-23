@@ -1,4 +1,4 @@
-﻿using OrderManager.BuildingBlocks.BaseClasses;
+﻿using OrderManager.BuildingBlocks;
 using OrderManager.Core.Domain.Identifiers;
 using OrderManager.Core.Domain.ValueObjects;
 

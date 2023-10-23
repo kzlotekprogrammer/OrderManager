@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using OrderManager.BuildingBlocks.BaseClasses;
 using OrderManager.BuildingBlocks.Interfaces;
 
 namespace OrderManager.BuildingBlocks.Specifications;

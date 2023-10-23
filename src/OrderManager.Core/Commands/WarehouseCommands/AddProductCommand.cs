@@ -1,6 +1,6 @@
 ﻿using System;
 using MediatR;
-using OrderManager.BuildingBlocks.BaseClasses;
+using OrderManager.BuildingBlocks;
 
 namespace OrderManager.Core.Commands.WarehouseCommands;
 

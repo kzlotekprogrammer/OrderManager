@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OrderManager.BuildingBlocks.BaseClasses;
+using OrderManager.BuildingBlocks;
 using OrderManager.Core.Domain.Identifiers;
 
 namespace OrderManager.Core.Domain.Entities;
@@ -27,6 +27,15 @@ public class Warehouse : AggregateRoot<WarehouseId>
             throw new InvalidOperationException($"Warehouse already contains product with id={product.Id.Value}");
 
         _products.Add(product);
+    }
+
+    public void UpdatePrice(ProductId productId, decimal amount)
+    {
+        Product? product = _products.FirstOrDefault(p => p.Id == productId);
+        if (product is null)
+            throw new InvalidOperationException($"Warehouse does not contains product with id={productId.Value}");
+
+        product.UpdatePrice(amount);
     }
 
     public void UpdateAmount(ProductId productId, int amount)

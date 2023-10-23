@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using OrderManager.BuildingBlocks.BaseClasses;
+using System.Linq;
+using OrderManager.BuildingBlocks;
 using OrderManager.Core.Domain.Identifiers;
 using OrderManager.Core.Domain.ValueObjects;
 using OrderManager.Domain.Enums;
@@ -67,6 +68,16 @@ public class Order : AggregateRoot<OrderId>
             throw new InvalidOperationException("Address can only be changed if order status is pending.");
 
         Address = address;
+    }
+
+    public void UpdateOrderItemPrice(ProductId productId, decimal newPrice)
+    {
+        IEnumerable<OrderItem> affectedItems = Items.Where(i => i.ProductId == productId);
+
+        foreach (OrderItem orderItem in affectedItems)
+        {
+            orderItem.UpdatePrice(newPrice);
+        }
     }
 
     public decimal CalculateTotalAmount()

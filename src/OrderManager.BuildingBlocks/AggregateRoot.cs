@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using OrderManager.BuildingBlocks.Interfaces;
 
-namespace OrderManager.BuildingBlocks.BaseClasses;
+namespace OrderManager.BuildingBlocks;
 
 public abstract class AggregateRoot<TIdentifier> : Entity<TIdentifier>
 {

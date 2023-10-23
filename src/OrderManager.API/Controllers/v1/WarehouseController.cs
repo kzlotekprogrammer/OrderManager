@@ -1,12 +1,11 @@
-﻿using MediatR;
-using System;
+﻿using System;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OrderManager.BuildingBlocks.BaseClasses;
-using OrderManager.Core.Commands.WarehouseCommands;
-using System.Threading.Tasks;
-using OrderManager.API.Controllers.v1.Models;
 using OrderManager.API.Controllers.v1.Extensions;
+using OrderManager.API.Controllers.v1.Models;
+using OrderManager.BuildingBlocks;
 
 namespace OrderManager.API.Controllers.v1;
 
@@ -28,6 +27,18 @@ public class WarehouseController : ControllerBase
     public async Task<IActionResult> AddProduct([FromBody] AddProductRequest request)
     {
         CommandResult<Guid> result = await _mediator.Send(request.Map());
+
+        if (!result.IsSuccess)
+            return BadRequest(result.ErrorMessage);
+
+        return Ok(result.Data);
+    }
+
+    [HttpPost]
+    [Route("UpdatePrice")]
+    public async Task<IActionResult> UpdatePrice([FromBody] UpdatePriceRequest request)
+    {
+        CommandResult<Unit> result = await _mediator.Send(request.Map());
 
         if (!result.IsSuccess)
             return BadRequest(result.ErrorMessage);

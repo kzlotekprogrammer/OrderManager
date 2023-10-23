@@ -68,6 +68,15 @@ public static class MappingExtensions
         };
     }
 
+    public static UpdatePriceCommand Map(this UpdatePriceRequest request)
+    {
+        return new UpdatePriceCommand
+        {
+            ProductId = request.ProductId,
+            Price = request.Price,
+        };
+    }
+
     public static UpdateAmountCommand Map(this UpdateAmountRequest request)
     {
         return new UpdateAmountCommand

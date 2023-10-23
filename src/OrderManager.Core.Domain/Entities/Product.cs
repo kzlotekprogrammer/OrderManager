@@ -1,5 +1,5 @@
 ﻿using System;
-using OrderManager.BuildingBlocks.BaseClasses;
+using OrderManager.BuildingBlocks;
 using OrderManager.Core.Domain.Identifiers;
 
 namespace OrderManager.Core.Domain.Entities;
@@ -28,6 +28,14 @@ public class Product : Entity<ProductId>
         Name = name;
         Price = price;
         Amount = amount;
+    }
+
+    public void UpdatePrice(decimal price)
+    {
+        if (price < 0)
+            throw new ArgumentException("Price cannot be less than 0");
+
+        Price = price;
     }
 
     public void UpdateAmount(int amount)

@@ -16,14 +16,14 @@ public class WarehouseRepository : GenericRepository<Warehouse, WarehouseId>, IW
 
     }
 
-    public override async Task<IEnumerable<Warehouse>> GetAllAsync()
+    public override async Task<List<Warehouse>> GetAllAsync()
     {
         return await _context.Warehouses
             .Include(w => w.Products)
             .ToListAsync();
     }
 
-    public override async Task<IEnumerable<Warehouse>> FindAsync(ISpecification<Warehouse> specification)
+    public override async Task<List<Warehouse>> FindAsync(ISpecification<Warehouse> specification)
     {
         return await _context.Warehouses
             .Where(specification.ToExpression())

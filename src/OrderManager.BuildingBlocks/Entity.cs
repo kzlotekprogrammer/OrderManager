@@ -1,4 +1,4 @@
-﻿namespace OrderManager.BuildingBlocks.BaseClasses;
+﻿namespace OrderManager.BuildingBlocks;
 
 public abstract class Entity<TIdentifier>
 {

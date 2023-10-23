@@ -1,4 +1,4 @@
-﻿namespace OrderManager.BuildingBlocks.BaseClasses;
+﻿namespace OrderManager.BuildingBlocks;
 
 public record CommandResult<T>(bool IsSuccess, T? Data, string? ErrorMessage)
 {

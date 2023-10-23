@@ -15,12 +15,12 @@ public class GenericRepository<TEntity, TIdentifier> : IRepository<TEntity, TIde
         _context = context;
     }
 
-    public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+    public virtual async Task<List<TEntity>> GetAllAsync()
     {
         return await _context.Set<TEntity>().ToListAsync();
     }
 
-    public virtual async Task<IEnumerable<TEntity>> FindAsync(ISpecification<TEntity> specification)
+    public virtual async Task<List<TEntity>> FindAsync(ISpecification<TEntity> specification)
     {
         return await _context.Set<TEntity>().Where(specification.ToExpression()).ToListAsync();
     }

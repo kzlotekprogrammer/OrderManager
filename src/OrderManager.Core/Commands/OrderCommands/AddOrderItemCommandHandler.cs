@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using OrderManager.BuildingBlocks.BaseClasses;
+using OrderManager.BuildingBlocks;
 using OrderManager.BuildingBlocks.Interfaces;
 using OrderManager.BuildingBlocks.Specifications;
 using OrderManager.Core.Domain.Entities;

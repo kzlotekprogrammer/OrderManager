@@ -4,8 +4,8 @@ using OrderManager.BuildingBlocks;
 
 namespace OrderManager.Core.Commands.WarehouseCommands;
 
-public record UpdateAmountCommand : IRequest<CommandResult<Unit>>
+public record UpdatePriceCommand : IRequest<CommandResult<Unit>>
 {
     public Guid ProductId { get; init; }
-    public int Amount { get; init; }
+    public decimal Price{ get; init; }
 }
